@@ -90,11 +90,12 @@ def show_sensor(sensor_id):
 def show_pond(pond_id):
     pondx = firebase.pond(pond_id, 48)
     last_do = pondx.do[-1]
-    last_depth = round(pondx.pressure[-1]*100/(997.0474*9.80665),2)
     last_temp = round(pondx.temp[-1],2)
     last_dt = pondx.d_dt[-1]
+    str_date = last_dt.strftime('%A, %B %d')
+    str_time = last_dt.strftime('%I:%M %p')
     pondx.plot_temp_do(mv=10)
-    return render_template('haucs_analytics.html', pond_id=pond_id, last_dt=last_dt, last_do=last_do, last_depth = last_depth, last_temp = last_temp)
+    return render_template('haucs_analytics.html', pond_id=pond_id, last_date=str_date, last_time = str_time,last_do=last_do, last_temp = last_temp)
 
 if __name__ == "__main__":
     if not deployed:

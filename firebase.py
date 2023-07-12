@@ -131,12 +131,15 @@ class pond():
 
         window = self.d_dt > lower
 
-        fig, axes = plt.subplots(1,2, figsize=(12,5))
-
-        axes[0].scatter(self.d_dt[window], moving_average(self.do[window], mv), color='r')
-        axes[0].set_ylabel('Dissolved Oxygen (%)', fontsize=14)
-        axes[1].plot(self.d_dt[window], moving_average(self.temp[window], mv), 'o-',color= 'c')
-        axes[1].set_ylabel("Water temperature (°F)", fontsize=14)
+        plt.figure(figsize=(12,5))
+        plt.subplot(1,2,1)
+        plt.plot(self.d_dt[window], moving_average(self.do[window], mv), 'o-', color='r')
+        plt.ylabel('Dissolved Oxygen (%)', fontsize=14)
+        plt.gcf().autofmt_xdate()
+        plt.gca().xaxis.set_major_formatter(date_formatter)
+        plt.subplot(1,2,2)
+        plt.plot(self.d_dt[window], moving_average(self.temp[window], mv), 'o-',color= 'c')
+        plt.ylabel("Water temperature (°F)", fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)
         plt.savefig("static/graphs/haucs/"+ str(self.id) + "_temp_do_graph.png")

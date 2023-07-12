@@ -67,10 +67,10 @@ function initMap() {
     
     for(let i=0; i<marker_locations.length; i++){
       if (status=='on'){
-        marker_icon = "static/aerator_on.svg";
+        marker_icon = "static/images/aerator_on.svg";
       }
       else{
-        marker_icon = "static/aerator_off.svg";
+        marker_icon = "static/images/aerator_off.svg";
       }
       
       marker = new google.maps.Marker({
@@ -93,13 +93,6 @@ function initMap() {
 
   // Call markers function
   map_markers = createMarkers(status, marker_locations, marker_icon)
-
-  // // Create legend
-  // const legend = document.getElementById('legend');
-  // div.innerHTML = '<img src="{{ url_for("static", filename=aerator_on.svg)}}"> ';
-  // legend.appendChild(div);
-    
-  // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
   // Add listeners for user interaction
   map.data.addListener("click", (event) => {

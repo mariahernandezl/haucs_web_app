@@ -1,6 +1,6 @@
 /*-------- home page content styling --------*/
 body{
-    background-image: url('/static/background.png');
+    background-image: url('/static/images/background.png');
     background-repeat: no-repeat;
     background-position: center 150px;
     background-size: auto auto;
