@@ -83,8 +83,10 @@ def show_sensor(sensor_id):
     bmx = firebase.bmass_sensor(sensor_id, 600)
     last_battv = bmx.battv[-1]
     last_dt = bmx.d_dt[-1]
+    str_date = last_dt.strftime('%A, %B %d')
+    str_time = last_dt.strftime('%I:%M %p')
     bmx.plot_timeseries(mv=10)
-    return render_template('tanks_analytics.html', sensor_id=sensor_id, last_battv=last_battv, last_dt=last_dt)
+    return render_template('tanks_analytics.html', sensor_id=sensor_id, last_date=str_date, last_time = str_time, last_battv=last_battv, last_dt=last_dt)
 
 @app.route('/pond'+'<int:pond_id>')
 def show_pond(pond_id):

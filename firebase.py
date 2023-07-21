@@ -74,6 +74,7 @@ class bmass_sensor():
         self.off = np.array([int(data['data'][i][0]) for i in data['data']])
         self.g = np.array([int(data['data'][i][2]) for i in data['data']])
         self.battv = np.array([float(data['status'][i]['batt_v']) for i in data['status']])
+        self.v = (self.on - self.off)/1024
         self.id = int(name)
 
     def plot_timeseries(self, mv):
@@ -81,13 +82,15 @@ class bmass_sensor():
         date_fmt = '%m-%d %H:%M'
         # Use DateFormatter to set the data to the correct format.
         date_formatter = mdates.DateFormatter(date_fmt, tz=(pytz.timezone("US/Eastern")))
-        lower = self.d_dt[-1] - timedelta(days=7)
+        lower = self.d_dt[-1-mv] - timedelta(days=7)
+        upper = self.d_dt[-1-mv]
 
-        window = self.d_dt > lower
+        window = (self.d_dt > lower) & (self.d_dt < upper)
+        v = moving_average(self.v, mv)[window]
 
         plt.figure()
-        plt.plot(self.d_dt[window], moving_average(self.on[window] - self.off[window], mv), color='c')
-        plt.ylabel("Sensor On - Off", fontsize=14)
+        plt.plot(self.d_dt[window], v, color='c')
+        plt.ylabel("Sensor Voltage (V)", fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)
         plt.savefig("static/graphs/biomass/"+ str(self.id) + "_bmass_diff.png")
@@ -130,15 +133,20 @@ class pond():
         lower = self.d_dt[-1] - timedelta(hours=24)
 
         window = self.d_dt > lower
+        data_pts = np.count_nonzero(window)
 
+        if data_pts < mv:
+            mv=data_pts
+        
         plt.figure(figsize=(12,5))
         plt.subplot(1,2,1)
-        plt.plot(self.d_dt[window], moving_average(self.do[window], mv), 'o-', color='r')
+        plt.plot(self.d_dt[window],moving_average(self.do[window],mv), 'o-',color='r')
+        # plt.scatter(self.d_dt[window],self.do[window], color='r')
         plt.ylabel('Dissolved Oxygen (%)', fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)
         plt.subplot(1,2,2)
-        plt.plot(self.d_dt[window], moving_average(self.temp[window], mv), 'o-',color= 'c')
+        plt.plot(self.d_dt[window], self.temp[window], 'o-',color= 'c')
         plt.ylabel("Water temperature (°F)", fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)

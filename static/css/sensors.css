@@ -38,13 +38,13 @@ body{
     font-size: 20px;
 }
 
-.data_summary div{
+/* .data_summary div{
     width: 250px;
     padding: 10px;
     background: white;
     border-radius: 20px;
     text-align: center;
-}
+} */
 
 .graph{
     position: relative;
