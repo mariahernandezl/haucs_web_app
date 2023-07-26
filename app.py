@@ -99,6 +99,10 @@ def show_pond(pond_id):
     pondx.plot_temp_do(mv=10)
     return render_template('haucs_analytics.html', pond_id=pond_id, last_date=str_date, last_time = str_time,last_do=last_do, last_temp = last_temp)
 
+@app.route('/feedback')
+def feedback():
+    return render_template('feedback.html',ponds=ponds)
+
 if __name__ == "__main__":
     if not deployed:
         app.run(debug=True)

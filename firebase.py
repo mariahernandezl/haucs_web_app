@@ -90,7 +90,7 @@ class bmass_sensor():
 
         plt.figure()
         plt.plot(self.d_dt[window], v, color='c')
-        plt.ylabel("Sensor Voltage (V)", fontsize=14)
+        plt.ylabel("$\Delta $ Diode Voltage (V)", fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)
         plt.savefig("static/graphs/biomass/"+ str(self.id) + "_bmass_diff.png")
@@ -146,7 +146,7 @@ class pond():
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)
         plt.subplot(1,2,2)
-        plt.plot(self.d_dt[window], self.temp[window], 'o-',color= 'c')
+        plt.plot(self.d_dt[window], moving_average(self.temp[window],mv), 'o-',color= 'c')
         plt.ylabel("Water temperature (°F)", fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.gca().xaxis.set_major_formatter(date_formatter)

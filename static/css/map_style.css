@@ -28,7 +28,7 @@
   background: #fff;
   border: 3px solid #000;
   padding: 10px;
-  margin: -8% 0 2% 10%;
+  margin: -8% 0 0% 10%;
  }
 
  .legend ul{
@@ -47,37 +47,13 @@
   margin-right: 1%;
  }
 
- /* .circle1{
-  height: 3%;
-  width: 3%;
-  background-color: #555;
-  border-radius: 50%;
- } */
-
- /* #legend{
-  background: #fff;
-  border: 3px solid #000;
-  padding: 10px;
- } */
- /* #legend {
-    font-family: Arial, sans-serif;
-    background: #fff;
-    padding: 10px;
-    margin: 10px;
-    border: 3px solid #000;
-  }
-  
-  #legend h3 {
-    margin-top: 0;
-  }
-  
-  #legend img {
-    vertical-align: middle;
-  } */
-
- @media (max-width: 700px){
+ @media (max-width: 850px){
     .map_container{
         height: fit-content;
+    }
+
+    .legend{
+      width: 75%;
     }
  }
 

@@ -17,7 +17,7 @@
 <body class="sensor-body">
 
     <div class="tank_number">
-        <h1>Tank {{sensor_id}} Specifics</h1>
+        <h1>Tank {{sensor_id}}</h1>
     </div>
 
     <div class="data_summary">
@@ -27,7 +27,7 @@
       </div>
 
     <div class = "graph">
-        <h1>Differential Graph of Data Collected <br> over the last 7 Days</h1>
+        <h1>Data Collected <br> over the last 7 Days</h1>
         <img src="{{ url_for('static', filename='graphs/biomass/'+sensor_id|string + '_bmass_diff.png')}}">
     </div>
 
